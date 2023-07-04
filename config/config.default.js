@@ -8,7 +8,7 @@ const redisConfig = {
   db: 0
 }
 
-exports.keys = 'qtuminfo-api'
+exports.keys = 'runebaseinfo-api'
 
 exports.security = {
   csrf: {enable: false}
@@ -36,7 +36,7 @@ exports.ratelimit = {
 exports.io = {
   redis: {
     ...redisConfig,
-    key: 'qtuminfo-api-socket.io'
+    key: 'runebaseinfo-api-socket.io'
   },
   namespace: {
     '/': {connectionMiddleware: ['connection']}
@@ -45,26 +45,26 @@ exports.io = {
 
 exports.sequelize = {
   dialect: 'mysql',
-  database: 'qtum_mainnet',
+  database: 'runebase_mainnet',
   host: 'localhost',
   port: 3306,
-  username: 'qtum',
-  password: ''
+  username: 'runebaseinfo',
+  password: 'runebaseinfo'
 }
 
-exports.qtum = {
+exports.runebase = {
   chain: 'mainnet'
 }
 
-exports.qtuminfo = {
-  path: path.resolve('..', 'qtuminfo'),
+exports.runebaseinfo = {
+  path: path.resolve('..', 'runebaseinfo'),
   port: 3001,
   rpc: {
     protocol: 'http',
     host: 'localhost',
-    port: 3889,
-    user: 'user',
-    password: 'password'
+    port: 9432,
+    user: 'runebaseinfo',
+    password: 'runebaseinfo'
   }
 }
 

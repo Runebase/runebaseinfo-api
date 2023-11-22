@@ -47,9 +47,9 @@ class TransactionController extends Controller {
     ))
   }
 
-  async list() {
-    const {ctx} = this
-    let {totalCount, ids} = await ctx.service.transaction.getAllTransactions()
+  async list(ctx) {
+    const {address} = ctx.params
+    let {totalCount, ids} = await ctx.service.transaction.getAllTransactions(address)
     let transactions = await Promise.all(ids.map(id => ctx.service.transaction.getTransaction(id)))
     ctx.body = {
       totalCount,

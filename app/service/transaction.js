@@ -476,25 +476,78 @@ class TransactionService extends Service {
     })).map(tx => tx.id)
   }
 
-  async getAllTransactions() {
+  async getAllTransactions(address) {
     const db = this.ctx.model
     const {Transaction} = db
     const {sql} = this.ctx.helper
     let {limit, offset} = this.ctx.state.pagination
-    let totalCount = await Transaction.count({transaction: this.ctx.state.transaction}) - (
-      this.app.chain.lastPoWBlockHeight === Infinity ? 1 : this.app.chain.lastPoWBlockHeight + 1
-    )
-    let list = await db.query(sql`
-      SELECT transaction.id AS id FROM transaction, (
-        SELECT _id FROM transaction
-        WHERE block_height > 0 AND (block_height <= ${this.app.chain.lastPoWBlockHeight} OR index_in_block > 0)
-        ORDER BY block_height DESC, index_in_block DESC, _id DESC
-        LIMIT ${offset}, ${limit}
-      ) list
-      WHERE transaction._id = list._id
-      ORDER BY transaction.block_height DESC, transaction.index_in_block DESC, transaction._id DESC
-    `, {type: db.QueryTypes.SELECT, transaction: this.ctx.state.transaction})
-    return {totalCount, ids: list.map(({id}) => id)}
+
+
+    if (address) {
+      const count = await db.query(sql`
+        SELECT COUNT(*) AS count
+        FROM
+          transaction
+          JOIN (
+            SELECT _id
+            FROM transaction
+            WHERE block_height > 0
+              AND (block_height <= ${this.app.chain.lastPoWBlockHeight} OR index_in_block > 0)
+            ORDER BY block_height DESC, index_in_block DESC, _id DESC
+          ) list ON transaction._id = list._id
+          LEFT JOIN balance_change ON transaction._id = balance_change.transaction_id
+          LEFT JOIN address ON balance_change.address_id = address._id
+        WHERE
+          address.string = ${address}
+      `, {type: db.QueryTypes.SELECT, transaction: this.ctx.state.transaction})
+
+      const totalCount = count[0].count
+
+      const list = await db.query(sql`
+        SELECT
+          transaction.id AS id,
+          balance_change.*,
+          address.*
+        FROM
+          transaction
+          JOIN (
+            SELECT _id
+            FROM transaction
+            WHERE block_height > 0
+            AND (block_height <= ${this.app.chain.lastPoWBlockHeight} OR index_in_block > 0)
+            ORDER BY block_height DESC, index_in_block DESC, _id DESC
+            LIMIT ${offset}, ${limit}
+          ) list ON transaction._id = list._id
+          LEFT JOIN balance_change ON transaction._id = balance_change.transaction_id
+          LEFT JOIN address ON balance_change.address_id = address._id
+        WHERE
+          address.string = ${address}
+        ORDER BY
+          transaction.block_height DESC,
+          transaction.index_in_block DESC,
+          transaction._id DESC
+      `, {type: db.QueryTypes.SELECT, transaction: this.ctx.state.transaction})
+      console.log(list)
+      return {totalCount, ids: list.map(({id}) => id)}
+    } else {
+      let totalCount = await Transaction.count({transaction: this.ctx.state.transaction}) - (
+        this.app.chain.lastPoWBlockHeight === Infinity ? 1 : this.app.chain.lastPoWBlockHeight + 1
+      )
+      const list = await db.query(sql`
+    SELECT transaction.id AS id FROM transaction, (
+      SELECT _id FROM transaction
+      WHERE block_height > 0
+      AND (block_height <= ${this.app.chain.lastPoWBlockHeight} OR index_in_block > 0)
+      ORDER BY block_height DESC, index_in_block DESC, _id DESC
+      LIMIT ${offset}, ${limit}
+    ) list
+    WHERE transaction._id = list._id
+    ORDER BY transaction.block_height DESC, transaction.index_in_block DESC, transaction._id DESC
+  `, {type: db.QueryTypes.SELECT, transaction: this.ctx.state.transaction})
+
+
+      return {totalCount, ids: list.map(({id}) => id)}
+    }
   }
 
   async getMempoolTransactionAddresses(id) {

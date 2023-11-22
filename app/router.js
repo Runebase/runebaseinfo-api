@@ -21,8 +21,9 @@ module.exports = app => {
   router.get('/raw-block/:block', controller.block.rawBlock)
   router.get('/recent-blocks', controller.block.recent)
 
+
   router.get(
-    '/tx/list',
+    '/tx/list/:address?',
     paginationMiddleware,
     controller.transaction.list
   )

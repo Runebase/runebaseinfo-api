@@ -516,7 +516,6 @@ class TransactionService extends Service {
             WHERE block_height > 0
             AND (block_height <= ${this.app.chain.lastPoWBlockHeight} OR index_in_block > 0)
             ORDER BY block_height DESC, index_in_block DESC, _id DESC
-            LIMIT ${offset}, ${limit}
           ) list ON transaction._id = list._id
           LEFT JOIN balance_change ON transaction._id = balance_change.transaction_id
           LEFT JOIN address ON balance_change.address_id = address._id
@@ -526,8 +525,8 @@ class TransactionService extends Service {
           transaction.block_height DESC,
           transaction.index_in_block DESC,
           transaction._id DESC
+        LIMIT ${offset}, ${limit}
       `, {type: db.QueryTypes.SELECT, transaction: this.ctx.state.transaction})
-      console.log(list)
       return {totalCount, ids: list.map(({id}) => id)}
     } else {
       let totalCount = await Transaction.count({transaction: this.ctx.state.transaction}) - (

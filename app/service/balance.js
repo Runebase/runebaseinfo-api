@@ -325,6 +325,23 @@ class BalanceService extends Service {
       }) + 1
     }
   }
+
+  async getDelegationsForStaker(address) {
+    try {
+      let client = new this.app.runebaseinfo.rpc(this.app.config.runebaseinfo.rpc)
+      let info = await client.getdelegationsforstaker(address)
+      return info
+    } catch (error) {
+      console.error('Error in getDelegationsForStaker:', error)
+      throw error
+    }
+  }
+
+  async getDelegationInfoForAddress(address) {
+    let client = new this.app.runebaseinfo.rpc(this.app.config.runebaseinfo.rpc)
+    let info = await client.getdelegationinfoforaddress(address)
+    return info
+  }
 }
 
 module.exports = BalanceService

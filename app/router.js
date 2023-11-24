@@ -69,6 +69,16 @@ module.exports = app => {
     controller.address.matureBalance
   )
   router.get(
+    '/address/:address/delegation',
+    addressMiddleware,
+    controller.address.delegation
+  )
+  router.get(
+    '/address/:address/super-staker',
+    addressMiddleware,
+    controller.address.superStaker
+  )
+  router.get(
     '/address/:address/qrc20-balance/:token',
     addressMiddleware, middleware.contract('token'),
     controller.address.qrc20TokenBalance

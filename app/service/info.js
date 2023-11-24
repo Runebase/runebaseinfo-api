@@ -22,7 +22,7 @@ class InfoService extends Service {
       return height * 20000
     } else {
       let supply = 1e8
-      let reward = 4
+      let reward = 100
       let interval = 985500
       let stakeHeight = height - this.app.chain.lastPoWBlockHeight
       let halvings = 0

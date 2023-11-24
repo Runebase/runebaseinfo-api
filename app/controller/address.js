@@ -74,6 +74,18 @@ class AddressController extends Controller {
     ctx.body = unconfirmed.toString()
   }
 
+  async delegation(ctx) {
+    const {address} = ctx.params
+    let delegationInfo = await ctx.service.balance.getDelegationInfoForAddress(address)
+    ctx.body = delegationInfo
+  }
+
+  async superStaker(ctx) {
+    const {address} = ctx.params
+    let superStakerInfo = await ctx.service.balance.getDelegationsForStaker(address)
+    ctx.body = superStakerInfo
+  }
+
   async qrc20TokenBalance() {
     let {ctx} = this
     let {address, token} = ctx.state

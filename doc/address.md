@@ -1285,3 +1285,109 @@ GET /address/QXUANYANRVAeX2Tomy9W1FTV6LQxWiNc99/qrc20-balance-history/fe59cbc170
   ]
 }
 ```
+## Get Super-Staker delegations
+
+**Request URL**
+```
+GET /address/:address/super-staker
+```
+
+**Request #1**
+```
+GET /address/RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN/super-staker
+```
+
+**Response #1**
+```json
+[
+  {
+    "delegate":"RZfA2aqRs8Y9EhVP9afAVg7kVdgnSf3NYP",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":901400,
+    "PoD":"1f76eff3bbda23ec6135127b5cd97ff0a1646ebf8f0cc3f9b5e1333d6f5d0eaa5a38ba407861816879bea3de398bfbaf51fdf4a4e1d182bee4ca90de88316ab5c6"
+  },{
+    "delegate":"RbedkJq8MvRuWuqCHBNpFTCHj6gAELLoRL",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":998422,
+    "PoD":"20d7d70e8d7f044482516a23684fc95781a98defe934d603bdac99fead73ced8f352ec5faa9ca62daf80b0132f9811a729fc5b924827f72c29510dba1dff10e3a0"
+  },{
+    "delegate":"RdTDs2ka9jJHnosM4cncfMTkSrhZtgoatM","staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":995676,
+    "PoD":"205727ab3e18cc3c7bdcdbebd0eb869f9004b49cf0a6bfd02e89581d13009afadc5e2c46e463d293b8bab5e050f5c613721edd4c792cc56c1efdd02bbc36874632"
+  },{
+    "delegate":"ReEVh76eHow7MnjoKjnohrnZYVhGi65ba4",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":900104,
+    "PoD":"1fae40783ba97d3a3380636ee0d5d3ccb7ed9a94688be57f8a53967a151cd9ef5c367a86d78f1379c45727d728b788643f55f3f8c84eab3795cf5766eaf97a5cf5"
+  },{
+    "delegate":"RfAXHnm7tV5HrqUcRgr9xrmGETbuukB7WH",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":908901,
+    "PoD":"1f4d60bacc1e9d7539b6dccd8d1d9885be1b35fcae4ec707e4903150270bcfe48c3db0d4b698c3a5ce59ab5ece352a3f9dbfb01f2f3194eeab64b45043b3c89acc"
+  },{
+    "delegate":"Rgc6phUNbjugdQpZqw4bBZFq2PYz4mafW1",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":901963,
+    "PoD":"207c63edf32285988c6ce85e6b65687b321745223eda057d13e1a803e3c65257b7277e0b919858764eb99e64da7a60bbc2342e30bb0d8029dfb47a3395b912c476"
+  },{
+    "delegate":"Rgj9Htch8zmGsNzWRLYMpQA8dyaPdw7txJ",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":983582,
+    "PoD":"1fd611eb68cb67d4c51e5345f62ffc9f0a6c3b20c0689f589a2dac66f8d83c7a8b1bd3aa02c77c0b2e7541d3f6fc85216d216fc726a5e75c69f307729d9e96a3d2"
+  },{
+    "delegate":"RiiHCFJBWhczQc1zRGPSFs3CgXiTgRPgNb",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":907286,
+    "PoD":"1f2262e0559a2e458eef799f86a9b02450f2e18fa20281d701c6fdad168b45027922408c37fb05e810b15d398cfbabf13d4e797c61ecdedf828046efc0ae0047a7"
+  },{
+    "delegate":"RkqTn7rDToKf2ELFwTmqidYrtL14ezd6S5",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":901366,
+    "PoD":"20535f33b75e72188247cc255e4eecfb39d480313d8ca70101c2fbf5935c78cbd43c244f5eba3f71b71d1a14e58c5776a224ffa24177bf4e3a7787c7858b1f14f3"
+  },{
+    "delegate":"RpeckQXgH9j1VpKJX99Y9dBFzsKDir6PSG",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":998012,
+    "PoD":"1f4f5ce5cd00617a3602ccc4c76bc783e7f8765d106bb99ffa5e66a4b0f6b1e3dc6a42edda34f45594fe81d605543cbb5a66e46fbcca9436966be21389c6db2dca"
+  },{
+    "delegate":"Rrb9KUG3P9RixE7EcGNraXahpWatE5bLKV",
+    "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+    "fee":10,
+    "blockHeight":990668,
+    "PoD":"206e98c0ac054c416a666b94520534c8b982fddcacf8f92bfeb219289c5c0548123151b8795917b8a20e0ce11e7d7a25ad3df151a0c0dff9432f852549b54206da"
+  }
+]
+```
+
+## Get Delegation info for address
+
+**Request URL**
+```
+GET /address/:address/delegation
+```
+
+**Request #1**
+```
+GET /address/RpeckQXgH9j1VpKJX99Y9dBFzsKDir6PSG/delegation
+```
+
+**Response #1**
+```json
+{
+  "staker":"RiJU7SuPn3tgj2zZBshJdM7gaz2wujDGNN",
+  "fee":10,
+  "blockHeight":998012,
+  "PoD":"1f4f5ce5cd00617a3602ccc4c76bc783e7f8765d106bb99ffa5e66a4b0f6b1e3dc6a42edda34f45594fe81d605543cbb5a66e46fbcca9436966be21389c6db2dca",
+  "verified":true
+}
+```
